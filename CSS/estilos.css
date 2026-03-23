@@ -1,0 +1,230 @@
+:root {
+  --color-principal: #2e8b57;     /* Verde esmeralda */
+  --color-secundario: #f08080;    /* Coral suave */
+  --color-fondo: #fff8f0;         /* Beige claro */
+  --color-texto: #333;
+  --color-hover: #d94f4f;
+  --borde-suave: 8px;
+  --sombra-suave: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --fuente-principal: 'Segoe UI', sans-serif;
+}
+
+/* RESET */
+body {
+  margin: 0;
+  font-family: var(--fuente-principal);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+/* NAVBAR */
+.main-header {
+  background-color: var(--color-principal);
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  flex: 1; /* cada elemento ocupa el mismo espacio horizontal */
+}
+
+/* Logo: sin hover */
+.navbar li:first-child a {
+  display: block;
+  text-align: center;
+  padding: 0; /* sin padding para que no se vea como botón */
+}
+
+.navbar img {
+  height: 50px;
+}
+
+/* Enlaces normales */
+.navbar li:not(:first-child) a {
+  display: block;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 15px 0;
+  transition: background-color 0.3s ease;
+}
+
+.navbar li:not(:first-child) a:hover {
+  background-color: var(--color-secundario);
+}
+
+/* BIENVENIDA */
+.bienvenida {
+  background-image: url('/IMG/bienvenida.png');
+  background-size: cover;
+  background-position: center;
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+.bienvenida-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.bienvenida-text {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+/* DESCRIPCIÓN */
+.descripcion-clinica {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.descripcion-title {
+  color: var(--color-principal);
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.descripcion-text {
+  font-size: 1rem;
+  max-width: 700px;
+  margin: 10px auto;
+  text-align: justify;
+}
+
+.btn-info {
+  background-color: var(--color-secundario);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--borde-suave);
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-info:hover {
+  background-color: var(--color-hover);
+}
+
+/* TARJETAS DE SERVICIOS */
+.seccion-destacada {
+  background-color: var(--color-fondo);
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.seccion-destacada h2 {
+  color: var(--color-principal);
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.tarjetas-servicios {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.tarjeta {
+  background-color: white;
+  border-radius: var(--borde-suave);
+  box-shadow: var(--sombra-suave);
+  width: 220px;
+  text-decoration: none;
+  color: var(--color-texto);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.tarjeta img {
+  width: 100%;
+  border-top-left-radius: var(--borde-suave);
+  border-top-right-radius: var(--borde-suave);
+}
+
+.tarjeta h3 {
+  margin: 10px 0 5px;
+  color: var(--color-principal);
+  font-size: 1.2rem;
+}
+
+.tarjeta p {
+  font-size: 0.95rem;
+  padding: 0 10px 15px;
+}
+
+/* FOOTER */
+.main-footer {
+  background-color: var(--color-principal);
+  color: white;
+  padding: 30px 20px;
+}
+
+.div-contactos {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.div-contactos ul {
+  list-style: none;
+  padding: 0;
+}
+
+.div-contactos h3 {
+  margin-bottom: 10px;
+}
+
+.div-contactos li {
+  margin-bottom: 5px;
+}
+
+.div-contactos a {
+  color: white;
+  text-decoration: none;
+}
+
+.div-contactos a:hover {
+  text-decoration: underline;
+}
+
+.div-reservados {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .tarjetas-servicios {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+  }
+
+  .bienvenida-title {
+    font-size: 2rem;
+  }
+
+  .descripcion-title {
+    font-size: 1.6rem;
+  }
+}
