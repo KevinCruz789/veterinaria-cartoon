@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Benji & Terry Clínica Integral</title>
     <link rel="stylesheet" href="/CSS/estilos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <!-- ===== HEADER ===== -->
     <header class="main-header">
         <nav class="navbar">
-            <ul>
-                <li><a href="index.html"><img src="/IMG/logoverterinaria.png" alt="logo de Benji & Terry"></a></li>
-                <li><a href="index.html">Inicio</a></li>
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="/IMG/logo.png" alt="Logo Benji & Terry">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Inicio</a></li>
                 <li><a href="estetica.html">Estética</a></li>
                 <li><a href="hospedaje.html">Hospedaje</a></li>
                 <li><a href="tienda.html">Tienda</a></li>
@@ -22,82 +28,207 @@
         </nav>
     </header>
 
-    <main class="container-index">
-        <section class="bienvenida">
-            <div class="bienvenida-content">
-                <h1 class="bienvenida-title">Bienvenidos a Benji & Terry Clínica Integral</h1>
-                <p class="bienvenida-text">
-                    Con más de 20 años de experiencia, ofrecemos atención veterinaria integral respaldada por un equipo profesional y comprometido. 
-                    Nos distinguimos por el trato cordial y cercano, garantizando que cada mascota reciba el cuidado especializado que merece en un ambiente de confianza y cariño.
-                </p>
+    <main>
+
+        <!-- ===== BIENVENIDA (imagen de fondo) ===== -->
+        <section class="bienvenida" style="background-image: url('IMG/bienvenida.jpg');">
+            <div class="bienvenida-overlay">
+                <div class="bienvenida-content">
+                    <h1>Bienvenidos a Benji & Terry<br>Clínica Integral</h1>
+                    <p>Con más de 20 años de experiencia, brindamos atención veterinaria integral con profesionalismo, cariño y dedicación para cada mascota.</p>
+                    <a href="citas.html" class="btn-primary">Agendar una cita</a>
+                </div>
             </div>
         </section>
 
+        <!-- ===== DESCRIPCIÓN ===== -->
         <section class="descripcion-clinica">
-            <div class="descripcion-content">
-                <h2 class="descripcion-title">Donde el cuidado se vuelve confianza</h2>
-                <p class="descripcion-text">
-                    Bienvenido a Benji & Terry Clínica Integral, un espacio dedicado al bienestar de tus mascotas. 
-                    Combinamos experiencia, cariño y profesionalismo para ofrecer atención veterinaria de calidad en cada especialidad.
-                </p>
-                <p class="descripcion-text">
-                    Nuestro equipo está comprometido con brindar un trato cercano y especializado. 
-                    Desde servicios estéticos y hospedaje hasta atención médica y tienda especializada, 
-                    cada rincón de nuestra clínica está pensado para que tu compañero peludo se sienta seguro y feliz.
-                </p>
-                <button class="btn-info">Ver más</button>
+            <div class="container">
+                <div class="descripcion-content">
+                    <div class="descripcion-texto">
+                        <h2>Donde el cuidado se vuelve confianza</h2>
+                        <p>En Benji & Terry combinamos experiencia médica, cariño genuino y un equipo comprometido para ofrecer atención de calidad en cada especialidad.</p>
+                        <p>Desde la estética hasta la atención médica, cada servicio está diseñado pensando en el bienestar de tu compañero.</p>
+                        <a href="#servicios" class="btn-secondary">Conocer más</a>
+                    </div>
+                    <div class="descripcion-stats">
+                        <div class="stat">
+                            <span class="stat-numero">20+</span>
+                            <span class="stat-label">Años de experiencia</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-numero">500+</span>
+                            <span class="stat-label">Pacientes atendidos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-numero">4</span>
+                            <span class="stat-label">Servicios especializados</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="seccion-destacada">
-            <h2>Conoce nuestros servicios</h2>
-            <div class="tarjetas-servicios">
-                <a href="estetica.html" class="tarjeta">
-                    <img src="/IMG/tarjeta-estetica.png" alt="Servicio de estetica">
-                    <h3>Estética</h3>
-                    <p>Baños, cortes y spa con cariño profesional.</p>
-                </a>
+        <!-- ===== SERVICIOS ===== -->
+        <section class="seccion-servicios" id="servicios">
+            <div class="container">
+                <div class="seccion-header">
+                    <h2>Nuestros Servicios</h2>
+                    <p>Todo lo que tu mascota necesita, en un solo lugar</p>
+                </div>
+                <div class="tarjetas-servicios">
 
-                <a href="hospedaje.html" class="tarjeta">
-                    <img src="/IMG/tarjeta-hospedaje.png" alt="Hospedaje para mascotas">
-                    <h3>Hospedaje</h3>
-                    <p>Espacios cómodos y seguros para tu mascota.</p>
-                </a>
-                
-                <a href="tienda.html" class="tarjeta">
-                    <img src="/IMG/tarjeta-tienda.png" alt="Tienda para mascotas">
-                    <h3>Tienda</h3>
-                    <p>Alimentos, accesorios y productos especializados.</p>
-                </a>
+                    <a href="estetica.html" class="tarjeta">
+                        <div class="tarjeta-img-wrap">
+                            <img src="/IMG/tarjeta-estetica.png" alt="Estética">
+                            <p class="tarjeta-badge">Popular</p>
+                        </div>
+                        <div class="tarjeta-body">
+                            <h3>Estética</h3>
+                            <p>Baños, cortes y tratamientos spa con profesionales especializados.</p>
+                            <p class="tarjeta-link">Ver servicio <i class="fas fa-arrow-right"></i></p>
+                        </div>
+                    </a>
 
-                <a href="citas.html" class="tarjeta">
-                    <img src="/IMG/targeta-citas.png" alt="Citas veterinarias">
-                    <h3>Citas</h3>
-                    <p>Agenda atención médica veterinaria integral.</p>
-                </a>
+                    <a href="hospedaje.html" class="tarjeta">
+                        <div class="tarjeta-img-wrap">
+                            <img src="/IMG/tarjeta-hospedaje.png" alt="Hospedaje">
+                        </div>
+                        <div class="tarjeta-body">
+                            <h3>Hospedaje</h3>
+                            <p>Espacios cómodos y seguros para que tu mascota esté tranquila.</p>
+                            <p class="tarjeta-link">Ver servicio <i class="fas fa-arrow-right"></i></p>
+                        </div>
+                    </a>
+
+                    <a href="tienda.html" class="tarjeta">
+                        <div class="tarjeta-img-wrap">
+                            <img src="/IMG/tarjeta-tienda.png" alt="Tienda">
+                            <p class="tarjeta-badge">Nuevo</p>
+                        </div>
+                        <div class="tarjeta-body">
+                            <h3>Tienda</h3>
+                            <p>Alimentos, accesorios y productos especializados para tu compañero.</p>
+                            <p class="tarjeta-link">Ver productos <i class="fas fa-arrow-right"></i></p>
+                        </div>
+                    </a>
+
+                    <a href="citas.html" class="tarjeta">
+                        <div class="tarjeta-img-wrap">
+                            <img src="/IMG/tarjeta-cita.png" alt="Citas Médicas">
+                        </div>
+                        <div class="tarjeta-body">
+                            <h3>Citas Médicas</h3>
+                            <p>Agenda tu consulta veterinaria de forma fácil y rápida.</p>
+                            <p class="tarjeta-link">Agendar cita <i class="fas fa-arrow-right"></i></p>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== COMENTARIOS ===== -->
+        <section class="seccion-comentarios">
+            <div class="container">
+                <div class="seccion-header seccion-header--claro">
+                    <h2>Lo que dicen nuestros clientes</h2>
+                    <p>Historias reales de mascotas felices</p>
+                </div>
+                <div class="comentarios-grid">
+
+                    <div class="comentario-card">
+                        <div class="estrellas">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="comentario-texto">"Llevé a mi perrito Max al servicio de estética y quedó increíble. El equipo es muy amable y se nota que aman a los animales. ¡Sin duda regresamos!"</p>
+                        <div class="comentario-autor">
+                            <div class="autor-avatar avatar-verde">LM</div>
+                            <div class="autor-info">
+                                <strong>Laura Martínez</strong>
+                                <p>Dueña de Max, Golden Retriever</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comentario-card">
+                        <div class="estrellas">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="comentario-texto">"Dejé a mi gata Luna en la pensión durante mis vacaciones y regresó feliz y muy bien cuidada. Me enviaban fotos todos los días. ¡Excelente servicio!"</p>
+                        <div class="comentario-autor">
+                            <div class="autor-avatar avatar-azul">CR</div>
+                            <div class="autor-info">
+                                <strong>Carlos Ramírez</strong>
+                                <p>Dueño de Luna, gata persa</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comentario-card">
+                        <div class="estrellas">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="comentario-texto">"La atención médica es de primera. El veterinario explicó todo con paciencia y Toby se recuperó muy rápido. Muy recomendada esta clínica."</p>
+                        <div class="comentario-autor">
+                            <div class="autor-avatar avatar-cafe">SG</div>
+                            <div class="autor-info">
+                                <strong>Sofía García</strong>
+                                <p>Dueña de Toby, Beagle</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
 
     </main>
 
+    <!-- ===== FOOTER ===== -->
     <footer class="main-footer">
-        <div class="div-contactos">
-            <ul>
-                <h3>Contacto</h3>
-                <li>+52 55 5467 7834</li>
-                <li>antencionaclientes@BenjiTerry.com</li>
-                <li>Av. Té 950, Granjas México, Iztacalco, 08400 Ciudad de México, CDMX</li>
-            </ul>
-            <ul>
-                <h3>Redes Sociales</h3>
-                <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Benji&Terry</a></li> <!-- Facebook -->
-                <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Benji&Terry</a></li> <!-- Instagram -->
-                <li><a href="https://twitter.com" target="_blank"><i class="fab fa-x-twitter"></i> Benji&Terry</a></li> <!-- X -->
-            </ul>
-        </div>
-        <div class="div-reservados">
-            <p>&copy; 2026 Benji & Terry Clinica Integral</p>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Benji & Terry</h3>
+                    <p>Clínica veterinaria integral con más de 20 años cuidando a tus mascotas con amor y profesionalismo.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +52 55 5467 7834</li>
+                        <li><i class="fas fa-envelope"></i> atencion@BenjiTerry.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Té 950, Granjas México, Iztacalco, CDMX</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Redes Sociales</h3>
+                    <ul>
+                        <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Benji&amp;Terry</a></li>
+                        <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Benji&amp;Terry</a></li>
+                        <li><a href="https://twitter.com" target="_blank"><i class="fab fa-x-twitter"></i> Benji&amp;Terry</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Navegación</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="estetica.html">Estética</a></li>
+                        <li><a href="hospedaje.html">Hospedaje</a></li>
+                        <li><a href="tienda.html">Tienda</a></li>
+                        <li><a href="citas.html">Citas</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Benji &amp; Terry Clínica Integral. Todos los derechos reservados.</p>
+            </div>
         </div>
     </footer>
+
+    <script src="JS/script.js"></script>
 </body>
 </html>
