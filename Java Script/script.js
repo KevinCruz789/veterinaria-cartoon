@@ -1,22 +1,11 @@
 /* ============================================================
-   script.js — Benji & Terry Clínica Integral
-   Archivo JavaScript único para todo el proyecto
-   ============================================================ */
-
-/* ===== MENÚ RESPONSIVE =====
-   El navbar usa flex-wrap para ajustarse automáticamente,
-   no requiere JavaScript para el menú.
-   ============================= */
-
-/* ============================================================
-   FORMULARIO 1 — ESTÉTICA CANINA
-   Operación: SUMA de servicios seleccionados
+   ESTÉTICA — SUMA DE SERVICIOS
    ============================================================ */
 function calcularEstetica() {
-    // Validación básica
-    const nombre = document.getElementById('nombreDueno');
-    const perro  = document.getElementById('nombrePerro');
-    let valido = true;
+    var nombre = document.getElementById('nombreDueno');
+    var perro  = document.getElementById('nombrePerro');
+    var tamano = document.getElementById('tamanoPerro');
+    var valido = true;
 
     if (!nombre || nombre.value.trim() === '') {
         mostrarError('errorNombreDueno', 'errorNombreDuenoMsg');
@@ -32,22 +21,47 @@ function calcularEstetica() {
         ocultarError('errorNombrePerro', 'errorNombrePerroMsg');
     }
 
-    if (!valido) return;
-
-    // Cálculo: SUMA de servicios
-    let total = 0;
-    if (document.getElementById('bano') && document.getElementById('bano').checked)   total += 100;
-    if (document.getElementById('corte') && document.getElementById('corte').checked) total += 80;
-    if (document.getElementById('spa') && document.getElementById('spa').checked)     total += 120;
-
-    if (total === 0) {
-        alert('Por favor selecciona al menos un servicio.');
-        return;
+    if (!tamano || tamano.value === '') {
+        mostrarError('errorTamano', 'errorTamanoMsg');
+        valido = false;
+    } else {
+        ocultarError('errorTamano', 'errorTamanoMsg');
     }
 
-    const resultado = document.getElementById('resultadoEstetica');
+    if (!valido) return;
+
+    // Cálculo: SUMA de servicios seleccionados
+    var total    = 0;
+    var desglose = [];
+
+    if (document.getElementById('bano') && document.getElementById('bano').checked) {
+        total += 100;
+        desglose.push('Baño $100');
+    }
+    if (document.getElementById('corte') && document.getElementById('corte').checked) {
+        total += 80;
+        desglose.push('Corte de pelo $80');
+    }
+    if (document.getElementById('unas') && document.getElementById('unas').checked) {
+        total += 50;
+        desglose.push('Corte de uñas $50');
+    }
+    if (document.getElementById('oidos') && document.getElementById('oidos').checked) {
+        total += 60;
+        desglose.push('Limpieza de oídos $60');
+    }
+
+    if (total === 0) {
+        mostrarError('errorServicios', 'errorServiciosMsg');
+        return;
+    } else {
+        ocultarError('errorServicios', 'errorServiciosMsg');
+    }
+
+    var mascota   = perro.value.trim();
+    var resultado = document.getElementById('resultadoEstetica');
     if (resultado) {
-        resultado.innerText = 'Total a pagar: $' + total + ' MXN';
+        resultado.innerText = mascota + ' — Servicios: ' + desglose.join(' + ') + ' = Total: $' + total + ' MXN';
         resultado.classList.add('visible');
     }
 }
@@ -85,8 +99,7 @@ function actualizarCostoDia() {
 }
 
 /* ============================================================
-   FORMULARIO 2 — PENSIÓN CANINA
-   Operación: MULTIPLICACIÓN (días × costo por día)
+   HOSPEDAJE — MULTIPLICACIÓN (días × costo por día)
    ============================================================ */
 function calcularPension() {
     var nombreInput  = document.getElementById('nombrePensionPerro');
@@ -143,59 +156,150 @@ function calcularPension() {
 }
 
 /* ============================================================
-   FORMULARIO 3 — TIENDA
-   Operaciones: MULTIPLICACIÓN y RESTA (descuento)
+   TIENDA — CARRITO DE COMPRA — MULTIPLICACIÓN (precio × cantidad) y RESTA (descuento)
    ============================================================ */
-function calcularCompra() {
-    const productoSelect = document.getElementById('producto');
-    const cantidadInput  = document.getElementById('cantidad');
-    let valido = true;
 
-    if (!productoSelect || productoSelect.value === '') {
-        mostrarError('errorProducto', 'errorProductoMsg');
-        valido = false;
+var carrito = []; // Array global que almacena los productos
+
+function agregarAlCarrito(nombre, precio) {
+    // Buscar si el producto ya existe en el carrito
+    var indice = -1;
+    for (var i = 0; i < carrito.length; i++) {
+        if (carrito[i].nombre === nombre) {
+            indice = i;
+            break;
+        }
+    }
+
+    if (indice >= 0) {
+        // Si ya existe, aumentar cantidad
+        carrito[indice].cantidad += 1;
     } else {
-        ocultarError('errorProducto', 'errorProductoMsg');
+        // Si no existe, agregarlo
+        carrito.push({ nombre: nombre, precio: precio, cantidad: 1 });
     }
 
-    if (!cantidadInput || cantidadInput.value === '' || parseInt(cantidadInput.value) <= 0) {
-        mostrarError('errorCantidad', 'errorCantidadMsg');
-        valido = false;
-    } else {
-        ocultarError('errorCantidad', 'errorCantidadMsg');
+    renderizarCarrito();
+
+    // Scroll suave al carrito
+    var seccionCarrito = document.getElementById('formulario-tienda');
+    if (seccionCarrito) {
+        seccionCarrito.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+}
 
-    if (!valido) return;
-
-    const precio   = parseFloat(productoSelect.value); // PARSEFLOT para precios
-    const cantidad = parseInt(cantidadInput.value);
-    let total      = precio * cantidad; // MULTIPLICACIÓN
-
-    let descuento = 0;
-    if (total > 500) {
-        descuento = 50;
-        total = total - descuento; // RESTA
+function cambiarCantidad(indice, delta) {
+    carrito[indice].cantidad += delta;
+    if (carrito[indice].cantidad <= 0) {
+        carrito.splice(indice, 1);
     }
+    renderizarCarrito();
+}
 
-    const resultado = document.getElementById('resultadoCompra');
+function eliminarProducto(indice) {
+    carrito.splice(indice, 1);
+    renderizarCarrito();
+}
+
+function vaciarCarrito() {
+    carrito = [];
+    renderizarCarrito();
+    var resultado = document.getElementById('resultadoCompra');
     if (resultado) {
-        let texto = 'Total: $' + total.toFixed(2) + ' MXN';
-        if (descuento > 0) texto += ' (descuento de $' + descuento + ' aplicado)';
-        resultado.innerText = texto;
+        resultado.classList.remove('visible');
+        resultado.innerText = '';
+    }
+}
+
+function renderizarCarrito() {
+    var vacio     = document.getElementById('carrito-vacio');
+    var contenido = document.getElementById('carrito-contenido');
+    var tbody     = document.getElementById('carrito-items');
+
+    if (carrito.length === 0) {
+        if (vacio)     vacio.style.display     = 'block';
+        if (contenido) contenido.style.display = 'none';
+        return;
+    }
+
+    if (vacio)     vacio.style.display     = 'none';
+    if (contenido) contenido.style.display = 'block';
+
+    // Renderizar filas
+    tbody.innerHTML = '';
+    var subtotal = 0;
+
+    for (var i = 0; i < carrito.length; i++) {
+        var item       = carrito[i];
+        var itemTotal  = item.precio * item.cantidad; // MULTIPLICACIÓN
+        subtotal      += itemTotal;
+
+        var tr = document.createElement('tr');
+        tr.innerHTML =
+            '<td>' + item.nombre + '</td>' +
+            '<td>$' + item.precio + '</td>' +
+            '<td>' +
+                '<div class="td-cantidad">' +
+                    '<button class="btn-cant" onclick="cambiarCantidad(' + i + ', -1)">−</button>' +
+                    item.cantidad +
+                    '<button class="btn-cant" onclick="cambiarCantidad(' + i + ', 1)">+</button>' +
+                '</div>' +
+            '</td>' +
+            '<td>$' + itemTotal + '</td>' +
+            '<td><button class="btn-eliminar" onclick="eliminarProducto(' + i + ')"><i class="fas fa-trash"></i></button></td>';
+        tbody.appendChild(tr);
+    }
+
+    // Calcular descuento y total
+    var descuento    = 0;
+    var filaDescuento = document.getElementById('fila-descuento');
+
+    if (subtotal > 500) {
+        descuento = 50;
+        if (filaDescuento) filaDescuento.style.display = 'flex';
+    } else {
+        if (filaDescuento) filaDescuento.style.display = 'none';
+    }
+
+    var total = subtotal - descuento; // RESTA
+
+    document.getElementById('carrito-subtotal').innerText = '$' + subtotal + ' MXN';
+    document.getElementById('carrito-total').innerText    = '$' + total + ' MXN';
+}
+
+function finalizarCompra() {
+    if (carrito.length === 0) {
+        alert('Tu carrito está vacío.');
+        return;
+    }
+
+    // Calcular totales
+    var subtotal  = 0;
+    for (var i = 0; i < carrito.length; i++) {
+        subtotal += carrito[i].precio * carrito[i].cantidad;
+    }
+    var descuento = subtotal > 500 ? 50 : 0;
+    var total     = subtotal - descuento;
+
+    var resultado = document.getElementById('resultadoCompra');
+    if (resultado) {
+        var msg = '¡Compra registrada! ' + carrito.length + ' producto(s) — Subtotal: $' + subtotal;
+        if (descuento > 0) msg += ' — Descuento: -$' + descuento;
+        msg += ' — Total: $' + total + ' MXN';
+        resultado.innerText = msg;
         resultado.classList.add('visible');
     }
 }
 
 /* ============================================================
-   FORMULARIO 4 — CITAS MÉDICAS
-   Operación: RESTA (cambio = pago - costo)
+   CITAS MÉDICAS — RESTA (cambio = pago - costo)
    ============================================================ */
 function calcularCambio() {
-    const duenoInput    = document.getElementById('nombreCitaDueno');
-    const mascotaInput  = document.getElementById('mascota');
-    const consultaSelect = document.getElementById('consulta');
-    const pagoInput     = document.getElementById('pago');
-    let valido = true;
+    var duenoInput     = document.getElementById('nombreCitaDueno');
+    var mascotaInput   = document.getElementById('mascota');
+    var consultaSelect = document.getElementById('consulta');
+    var pagoInput      = document.getElementById('pago');
+    var valido = true;
 
     if (!duenoInput || duenoInput.value.trim() === '') {
         mostrarError('errorCitaDueno', 'errorCitaDuenoMsg');
@@ -211,10 +315,17 @@ function calcularCambio() {
         ocultarError('errorMascota', 'errorMascotaMsg');
     }
 
+    if (!consultaSelect || consultaSelect.value === '') {
+        mostrarError('errorConsulta', 'errorConsultaMsg');
+        valido = false;
+    } else {
+        ocultarError('errorConsulta', 'errorConsultaMsg');
+    }
+
     if (!valido) return;
 
-    const costo = parseInt(consultaSelect.value);
-    const pago  = parseInt(pagoInput.value);
+    var costo = parseInt(consultaSelect.value);
+    var pago  = parseInt(pagoInput.value);
 
     if (isNaN(pago) || pago <= 0) {
         mostrarError('errorPago', 'errorPagoMsg');
@@ -224,34 +335,29 @@ function calcularCambio() {
     }
 
     if (pago < costo) {
-        alert('El pago recibido es menor al costo de la consulta ($' + costo + ').');
+        alert('El pago recibido ($' + pago + ') es menor al costo de la consulta ($' + costo + ').');
         return;
     }
 
-    const cambio = pago - costo; // RESTA
-    mostrarCostoConsulta(costo);
+    var cambio  = pago - costo; // RESTA
+    var dueno   = duenoInput.value.trim();
+    var mascota = mascotaInput.value.trim();
 
-    const resultado = document.getElementById('resultadoCita');
+    var resultado = document.getElementById('resultadoCita');
     if (resultado) {
-        resultado.innerText = 'Costo: $' + costo + ' | Pago: $' + pago + ' | Cambio: $' + cambio + ' MXN';
+        resultado.innerText = 'Cita registrada para ' + dueno + ' y su mascota ' + mascota +
+            ' — Costo: $' + costo + ' | Pago: $' + pago + ' | Cambio: $' + cambio + ' MXN';
         resultado.classList.add('visible');
     }
 }
 
-// Muestra el costo al seleccionar tipo de consulta
-function mostrarCostoConsulta(costo) {
-    const costoSpan = document.getElementById('costoConsulta');
-    if (costoSpan) {
-        costoSpan.innerText = 'Costo de la consulta: $' + costo + ' MXN';
-        costoSpan.style.display = 'block';
-    }
-}
-
+// Actualiza el campo de costo al seleccionar tipo de consulta
 function actualizarCosto() {
-    const consultaSelect = document.getElementById('consulta');
-    if (consultaSelect) {
-        const costo = parseInt(consultaSelect.value);
-        mostrarCostoConsulta(costo);
+    var consultaSelect = document.getElementById('consulta');
+    var costoInput     = document.getElementById('costoConsulta');
+    if (consultaSelect && costoInput && consultaSelect.value !== '') {
+        var costo = parseInt(consultaSelect.value);
+        costoInput.value = '$' + costo + ' MXN';
     }
 }
 

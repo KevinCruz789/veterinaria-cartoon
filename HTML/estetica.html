@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estética — Benji & Terry Clínica Integral</title>
+    <link rel="stylesheet" href="/CSS/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="/IMG/logo.png" alt="Logo Benji & Terry">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="estetica.html" class="active">Estética</a></li>
+                <li><a href="hospedaje.html">Hospedaje</a></li>
+                <li><a href="tienda.html">Tienda</a></li>
+                <li><a href="citas.html">Citas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ===== BANNER ===== -->
+        <section class="bienvenida" style="background-image: url('/IMG/fondo-estetica.png');">
+            <div class="bienvenida-overlay">
+                <div class="bienvenida-content">
+                    <h1>Estética</h1>
+                    <p>Cuidado profesional para que tu mascota luzca y se sienta increíble. Manos expertas y productos de calidad.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== INFORMACIÓN DE SERVICIOS ===== -->
+        <section class="servicios-info">
+            <div class="container">
+                <div class="seccion-header">
+                    <h2>Nuestros Servicios</h2>
+                    <p>Selecciona uno o más servicios para cotizar tu visita</p>
+                </div>
+
+                <div class="servicios-lista">
+
+                    <div class="servicio-item">
+                        <i class="fas fa-shower"></i>
+                        <h3>Baño</h3>
+                        <p>Baño completo con productos especializados según el tipo de pelaje.</p>
+                        <strong class="servicio-precio">$100 MXN</strong>
+                    </div>
+
+                    <div class="servicio-item">
+                        <i class="fas fa-cut"></i>
+                        <h3>Corte de Pelo</h3>
+                        <p>Corte profesional adaptado a la raza y preferencia del dueño.</p>
+                        <strong class="servicio-precio">$80 MXN</strong>
+                    </div>
+
+                    <div class="servicio-item">
+                        <i class="fas fa-paw"></i>
+                        <h3>Corte de Uñas</h3>
+                        <p>Recorte seguro y preciso para la comodidad de tu mascota.</p>
+                        <strong class="servicio-precio">$50 MXN</strong>
+                    </div>
+
+                    <div class="servicio-item">
+                        <i class="fas fa-ear-deaf"></i>
+                        <h3>Limpieza de Oídos</h3>
+                        <p>Limpieza suave para prevenir infecciones y mantener la higiene.</p>
+                        <strong class="servicio-precio">$60 MXN</strong>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FORMULARIO DE COTIZACIÓN ===== -->
+        <section class="seccion-formulario" id="formulario-estetica">
+            <div class="container">
+                <div class="form-card">
+                    <h2><i class="fas fa-calculator"></i> Cotizar Servicios</h2>
+
+                    <div class="form-grupo">
+                        <label for="nombreDueno">Nombre del dueño</label>
+                        <input type="text" id="nombreDueno" placeholder="Ej. Juan Pérez">
+                        <p class="error-msg" id="errorNombreDuenoMsg">Por favor ingresa tu nombre.</p>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="nombrePerro">Nombre de la mascota</label>
+                        <input type="text" id="nombrePerro" placeholder="Ej. Rocky">
+                        <p class="error-msg" id="errorNombrePerroMsg">Por favor ingresa el nombre de la mascota.</p>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="tamanoPerro">Tamaño de la mascota</label>
+                        <select id="tamanoPerro">
+                            <option value="">Selecciona un tamaño</option>
+                            <option value="pequeño">Pequeño (hasta 10 kg)</option>
+                            <option value="mediano">Mediano (10–25 kg)</option>
+                            <option value="grande">Grande (más de 25 kg)</option>
+                        </select>
+                        <p class="error-msg" id="errorTamanoMsg">Por favor selecciona el tamaño.</p>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label>Servicios a contratar</label>
+                        <div class="checkbox-grupo">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="bano" value="100">
+                                Baño — $100
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="corte" value="80">
+                                Corte de pelo — $80
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="unas" value="50">
+                                Corte de uñas — $50
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="oidos" value="60">
+                                Limpieza de oídos — $60
+                            </label>
+                        </div>
+                        <p class="error-msg" id="errorServiciosMsg">Por favor selecciona al menos un servicio.</p>
+                    </div>
+
+                    <button class="btn-form" onclick="calcularEstetica()">Calcular cotización</button>
+
+                    <div class="resultado-box" id="resultadoEstetica"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Benji &amp; Terry</h3>
+                    <p>Clínica veterinaria integral con más de 20 años cuidando a tus mascotas con amor y profesionalismo.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +52 55 5467 7834</li>
+                        <li><i class="fas fa-envelope"></i> atencion@BenjiTerry.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Té 950, Granjas México, Iztacalco, CDMX</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Redes Sociales</h3>
+                    <ul>
+                        <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Benji&amp;Terry</a></li>
+                        <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Benji&amp;Terry</a></li>
+                        <li><a href="https://twitter.com" target="_blank"><i class="fab fa-x-twitter"></i> Benji&amp;Terry</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Navegación</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="estetica.html">Estética</a></li>
+                        <li><a href="hospedaje.html">Hospedaje</a></li>
+                        <li><a href="tienda.html">Tienda</a></li>
+                        <li><a href="citas.html">Citas</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Benji &amp; Terry Clínica Integral. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/Java Script/script.js"></script>
+</body>
+</html>

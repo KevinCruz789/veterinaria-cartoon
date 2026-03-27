@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citas Médicas — Benji & Terry Clínica Integral</title>
+    <link rel="stylesheet" href="/CSS/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="/IMG/logo.png" alt="Logo Benji & Terry">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="estetica.html">Estética</a></li>
+                <li><a href="hospedaje.html">Hospedaje</a></li>
+                <li><a href="tienda.html">Tienda</a></li>
+                <li><a href="citas.html" class="active">Citas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ===== BANNER ===== -->
+        <section class="bienvenida" style="background-image: url('/IMG/fondo-consulta.png');">
+            <div class="bienvenida-overlay">
+                <div class="bienvenida-content">
+                    <h1>Citas Médicas</h1>
+                    <p>Agenda la consulta de tu mascota de forma rápida y sencilla. Nuestro equipo veterinario está listo para atenderlos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TIPOS DE CONSULTA ===== -->
+        <section class="agenda-info">
+            <div class="container">
+                <div class="seccion-header">
+                    <h2>Tipos de Consulta</h2>
+                    <p>Selecciona el servicio que necesita tu mascota</p>
+                </div>
+                <div class="tipos-consulta">
+
+                    <div class="consulta-item">
+                        <i class="fas fa-stethoscope"></i>
+                        <h3>Consulta General</h3>
+                        <p>Revisión completa del estado de salud de tu mascota.</p>
+                        <p class="costo">$350 MXN</p>
+                    </div>
+
+                    <div class="consulta-item">
+                        <i class="fas fa-syringe"></i>
+                        <h3>Vacunación</h3>
+                        <p>Aplicación de vacunas según el esquema de tu mascota.</p>
+                        <p class="costo">$280 MXN</p>
+                    </div>
+
+                    <div class="consulta-item">
+                        <i class="fas fa-pills"></i>
+                        <h3>Desparasitación</h3>
+                        <p>Tratamiento interno y externo contra parásitos.</p>
+                        <p class="costo">$200 MXN</p>
+                    </div>
+
+                    <div class="consulta-item consulta-item--urgencia">
+                        <i class="fas fa-ambulance"></i>
+                        <h3>Urgencias</h3>
+                        <p>Atención inmediata para casos de emergencia.</p>
+                        <p class="costo">$500 MXN</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FORMULARIO DE CITA ===== -->
+        <section class="seccion-formulario" id="formulario-cita">
+            <div class="container">
+                <div class="form-card">
+                    <h2><i class="fas fa-calendar-check"></i> Registrar Cita</h2>
+
+                    <div class="form-grupo">
+                        <label for="nombreCitaDueno">Nombre del dueño</label>
+                        <input type="text" id="nombreCitaDueno" placeholder="Ej. María López">
+                        <p class="error-msg" id="errorCitaDuenoMsg">Por favor ingresa tu nombre.</p>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="mascota">Nombre de la mascota</label>
+                        <input type="text" id="mascota" placeholder="Ej. Luna">
+                        <p class="error-msg" id="errorMascotaMsg">Por favor ingresa el nombre de tu mascota.</p>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="consulta">Tipo de consulta</label>
+                        <select id="consulta" onchange="actualizarCosto()">
+                            <option value="">Selecciona un tipo de consulta</option>
+                            <option value="350">Consulta General — $350 MXN</option>
+                            <option value="280">Vacunación — $280 MXN</option>
+                            <option value="200">Desparasitación — $200 MXN</option>
+                            <option value="500">Urgencias — $500 MXN</option>
+                        </select>
+                        <p class="error-msg" id="errorConsultaMsg">Por favor selecciona el tipo de consulta.</p>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label>Costo de la consulta</label>
+                        <input type="text" id="costoConsulta" readonly placeholder="Se muestra al seleccionar consulta" style="background: var(--gris-claro); cursor: not-allowed;">
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="pago">Pago recibido (MXN)</label>
+                        <input type="number" id="pago" min="1" placeholder="Ej. 400">
+                        <p class="error-msg" id="errorPagoMsg">Por favor ingresa un monto de pago válido.</p>
+                    </div>
+
+                    <button class="btn-form" onclick="calcularCambio()">Registrar y calcular cambio</button>
+
+                    <div class="resultado-box" id="resultadoCita"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Benji &amp; Terry</h3>
+                    <p>Clínica veterinaria integral con más de 20 años cuidando a tus mascotas con amor y profesionalismo.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +52 55 5467 7834</li>
+                        <li><i class="fas fa-envelope"></i> atencion@BenjiTerry.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Té 950, Granjas México, Iztacalco, CDMX</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Redes Sociales</h3>
+                    <ul>
+                        <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Benji&amp;Terry</a></li>
+                        <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Benji&amp;Terry</a></li>
+                        <li><a href="https://twitter.com" target="_blank"><i class="fab fa-x-twitter"></i> Benji&amp;Terry</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Navegación</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="estetica.html">Estética</a></li>
+                        <li><a href="hospedaje.html">Hospedaje</a></li>
+                        <li><a href="tienda.html">Tienda</a></li>
+                        <li><a href="citas.html">Citas</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Benji &amp; Terry Clínica Integral. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/Java Script/script.js"></script>
+</body>
+</html>
